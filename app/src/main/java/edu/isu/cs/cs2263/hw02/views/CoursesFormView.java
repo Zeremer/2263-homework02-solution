@@ -109,7 +109,10 @@ public class CoursesFormView extends AppView {
         } else {
             lblMessage.setText("");
 
-            Course c = new Course(tfName.getText(), code, spnNumber.getValue(), spnCredits.getValue());
+            Course c = new Course(spnCredits.getValue(),
+                    code,
+                    spnNumber.getValue(),
+                    tfName.getText());
             parent.addCourse(c);
 
             parent.showWelcome();

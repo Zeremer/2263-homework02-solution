@@ -10,6 +10,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'io.freefair.lombok' version '6.2.0'
+    id 'jacoco'
 }
 
 repositories {
@@ -25,8 +27,19 @@ dependencies {
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
+    // For testing javaFX
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
+
+    // For mocking
+    implementation 'org.mockito:mockito-core:4.0.0'
+
+    // For logging
+    implementation 'com.google.flogger:flogger:0.5.1'
+    runtimeOnly 'com.google.flogger:flogger-system-backend:0.5.1'
 
     // Ikonli Text Icons
     implementation 'org.kordamp.ikonli:ikonli-javafx:12.1.0'
@@ -47,5 +60,40 @@ tasks.named('test') {
 
 javafx {
     version = "17"
-    modules = ['javafx.controls']
+    modules = ['javafx.controls', 'javafx.fxml']
 }
+
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory = file("${buildDir}/reports/jacoco")
+    applyTo run
+    }
+
+test{
+finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    group = "build"
+    dependsOn test
+    reports {
+      xml.enabled false
+      csv.enabled false
+      html.outputLocation = file("${buildDir}/reports/jacocoHtml")
+  }
+}
+
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
