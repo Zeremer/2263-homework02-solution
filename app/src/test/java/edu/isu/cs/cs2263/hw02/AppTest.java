@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.exceptions.base.MockitoException;
 import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxRobotException;
@@ -23,6 +24,20 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.LabeledMatchers;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
@@ -32,38 +47,41 @@ import static org.junit.jupiter.api.Assertions.*;
 //@ExtendWith(ApplicationExtension.class)
 //class AppTest {
 
-
 public class AppTest extends ApplicationTest {
 
-    private final App app = new App();
+    App app = mock(App.class);
+
+    @Start
+    public void start(Stage stage) throws Exception {
+        app.launch(App.class);
+        stage.show();
+        stage.toFront();
+    }
 
 //    @Start
 //    private void start(Stage stage) throws Exception {
 //        ApplicationTest.launch(App.class);
 //        stage.show();
 //    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        stage.setScene();
-        stage.show();
-        stage.toFront();
-    }
-
-//    @Test (expected = FxRobotException.class)
-//    public void clickOnNothing() {
-//        clickOn("#Nothing");
+//
+//    @Test
+//    public void clickOnNothing(FxRobot robot) {
+//        Assertions.assertThat(robot.clickOn("#Nothing"));
 //    }
 //
 //    @Test
 //    void welcomeTest(FxRobot robot) {
 //        Assertions.assertThat(robot.lookup("#WelcomeView").queryAs(View.class)).hasText("Welcome");
 //    }
+//
+//    @Test
+//    void CourseViewButtonTest(FxRobot robot) {
+//        Assertions.assertThat(robot.lookup(".display").queryButton()).hasText("Display (dept.)");
+//    }
+}
 
-    @Test
-    void CourseViewButtonTest(FxRobot robot) {
-        Assertions.assertThat(robot.lookup(".display").queryButton()).hasText("Display (dept.)");
-    }
+// --Below is for reference--
+
 //
 //    public void start(Stage primaryStage) throws Exception {
 //        primaryStage.setTitle("Course View");
@@ -179,4 +197,3 @@ public class AppTest extends ApplicationTest {
 //    public static void main(String[] args) {
 //        Application.launch(args);
 //    }
-}

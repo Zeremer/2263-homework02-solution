@@ -16,6 +16,10 @@
 //import static org.junit.jupiter.api.Assertions.*;
 //
 //public class DisplayListViewTest {
+//}
+
+// Below is for reference
+
 //
 //    ListView<Course> lstCourses;
 //

@@ -15,7 +15,10 @@
 //import static org.junit.jupiter.api.Assertions.*;
 //
 //public class WelcomeViewTest {
-//
+//}
+
+// Below is for reference
+
 //    public WelcomeView(App parent) {
 //        super(parent);
 //    }

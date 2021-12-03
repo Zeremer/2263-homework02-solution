@@ -8,7 +8,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import lombok.extern.flogger.Flogger;
 
+@Flogger
 public class DisplayListView extends AppView {
 
     ListView<Course> lstCourses;
@@ -34,6 +36,7 @@ public class DisplayListView extends AppView {
 
     @Override
     public void updateData() {
+        log.atInfo().log("Updating data");
         int index = parent.getSelectedDepartment();
         String code = Course.CODES[index];
 

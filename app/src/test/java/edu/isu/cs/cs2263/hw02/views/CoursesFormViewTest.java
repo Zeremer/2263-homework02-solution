@@ -26,7 +26,10 @@
 //import static org.junit.jupiter.api.Assertions.*;
 //
 //public class CoursesFormViewTest {
-//
+//}
+
+//  Below is for reference
+
 //    private TextField tfName;
 //    private Spinner<Integer> spnNumber;
 //    private Spinner<Integer> spnCredits;
