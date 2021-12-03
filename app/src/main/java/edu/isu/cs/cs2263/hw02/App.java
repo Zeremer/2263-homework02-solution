@@ -17,14 +17,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import lombok.extern.flogger.Flogger;
+import lombok.extern.log4j.Log4j2;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignF;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
+
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.Vector;
 
+@Flogger
 public class App extends Application {
 
     private Vector<Course> courses;
@@ -61,6 +67,8 @@ public class App extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        log.atInfo().log("UI starting");
+
         primaryStage.setTitle("Course View");
 
         Button display = new Button("Display (dept.)");
@@ -124,9 +132,12 @@ public class App extends Application {
         FontIcon fi = FontIcon.of(MaterialDesignF.FLASK_EMPTY, 32);
 
         primaryStage.show();
+
+        log.atInfo().log("UI launched");
     }
 
     public Vector<Course> getCourses() {
+        log.atInfo().log("Course get");
         return courses;
     }
 
@@ -135,19 +146,23 @@ public class App extends Application {
         currentView = views.get(viewName);
         mainLayout.setCenter(currentView.getView());
         mainLayout.requestLayout();
+        log.atInfo().log("View set");
     }
 
     public void showCourseForm() {
         setView("CourseForm");
         currentView.updateData();
+        log.atInfo().log("Showing course form");
     }
 
     public void displayList() {
         setView("DisplayList");
         currentView.updateData();
+        log.atInfo().log("List displayed");
     }
 
     public void exit() {
+        log.atInfo().log("Exiting...");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setContentText("Are you sure you want to exit?");
@@ -160,18 +175,22 @@ public class App extends Application {
     }
 
     public int getSelectedDepartment() {
+        log.atInfo().log("Getting selected department");
         return depts.getSelectionModel().getSelectedIndex();
     }
 
     public void showWelcome() {
+        log.atInfo().log("Showing welcome");
         setView("Welcome");
     }
 
     public void addCourse(Course course) {
+        log.atInfo().log("Adding course");
         courses.add(course);
     }
 
     public static void main(String[] args) {
+        log.atInfo().log("Running main");
         Application.launch(args);
     }
 }

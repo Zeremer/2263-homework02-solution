@@ -15,10 +15,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import lombok.extern.flogger.Flogger;
+import lombok.extern.log4j.Log4j2;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignP;
 import org.kordamp.ikonli.materialdesign2.MaterialDesignR;
 
+@Flogger
 public class CoursesFormView extends AppView {
 
     private TextField tfName;
@@ -100,9 +103,11 @@ public class CoursesFormView extends AppView {
         main.setPadding(new Insets(10,10,10,10));
 
         view = main;
+        log.atInfo().log("View initialized");
     }
 
     private void validateAndAdd() {
+        log.atInfo().log("Validating");
         if (tfName.getText().isBlank()) {
             lblMessage.setText("Error: Name cannot be empty!");
             lblMessage.setTextFill(Color.RED);
@@ -116,6 +121,7 @@ public class CoursesFormView extends AppView {
             parent.addCourse(c);
 
             parent.showWelcome();
+            log.atInfo().log("Added");
         }
     }
 

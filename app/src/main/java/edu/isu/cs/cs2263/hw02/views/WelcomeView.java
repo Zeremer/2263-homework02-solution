@@ -7,7 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import lombok.extern.flogger.Flogger;
 
+@Flogger
 public class WelcomeView extends AppView {
 
     public WelcomeView(App parent) {
@@ -16,6 +18,7 @@ public class WelcomeView extends AppView {
 
     @Override
     public void initView() {
+        log.atInfo().log("Setting view to welcome");
         Label message = new Label("Welcome to Course List");
 
         message.setFont(Font.font("Roboto", FontWeight.BOLD, 16));
