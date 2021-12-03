@@ -24,8 +24,10 @@
 //
 //@ExtendWith(ApplicationExtension.class)
 //public class AppViewTest {
-//
-//
+//}
+
+//  Below is for reference
+
 //
 //    protected Node view;
 //    protected App parent;
